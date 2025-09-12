@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+# 📹 Video Management System – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of the Video Management System, built with **React 19** and optimized for scalability, performance, and developer experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+### **1. Framework**
+**React 19 (Latest)**  
+- Most popular and well-supported frontend library.  
+- Includes new React 19 features (`use`, `useOptimistic`, `useActionState`) for better async and form handling.  
+- Strong ecosystem and long-term community support.  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### **2. Build Tool**
+**Vite**  
+- Ultra-fast development server with hot module reload (HMR).  
+- Modern and optimized production builds.  
+- Simpler and faster than Create React App.  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### **3. Styling**
+**Tailwind CSS v4**  
+- Utility-first CSS for consistent design.  
+- Speeds up UI development with prebuilt responsive utilities.  
+- Built-in dark mode and accessibility-friendly classes.  
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### **4. State & API Handling**
+- **Axios** → For making API requests to our Node.js microservices backend.  
+- **Zustand** → Lightweight and scalable global state management.  
+- **React Context** → For smaller shared states (auth, theme). 
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### **5. Routing**
+**React Router v7**  
+- Declarative, modern routing for React apps.  
+- Supports nested routes, loaders, and error handling.  
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### **6. Video & Realtime**
+- **React Player** and **WebRTC APIs** for video streaming and playback.  
+- WebSocket support for real-time alerts and event updates.  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📂 Project Structure
+
+```bash
+security-dashboard/
+├── src/
+│   ├── api/                # Axios instance & API modules
+│   ├── services/           # WebSocket service, event bus
+│   ├── features/           # Feature-based modules (cameras, AI, alerts)
+│   ├── components/common/  # Shared UI components
+│   ├── layouts/            # App layouts (Dashboard, Auth)
+│   ├── hooks/              # Custom hooks (useApi, etc.)
+│   ├── store/              # Global Zustand store
+│   ├── utils/              # Helper functions
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── router.tsx
+├── package.json
+├── vite.config.ts
+└── .gitignore
