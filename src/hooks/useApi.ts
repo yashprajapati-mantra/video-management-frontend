@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -29,6 +29,8 @@ function useApi<T = any>(
   url: string,
   options: AxiosRequestConfig = {}
 ): UseApiResult<T> {
+  // Memoize options to prevent infinite loop if a new object is passed each render
+  const memoizedOptions = useMemo(() => options, [JSON.stringify(options)]);
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>(null);
@@ -38,14 +40,14 @@ function useApi<T = any>(
     setLoading(true);
     setError(null);
     try {
-      const response: AxiosResponse<T> = await axios(url, options);
+      const response: AxiosResponse<T> = await axios(url, memoizedOptions);
       setData(response.data);
     } catch (err) {
       setError(err);
     } finally {
       setLoading(false);
     }
-  }, [url, options]);
+  }, [url, memoizedOptions]);
 
 
   useEffect(() => {
